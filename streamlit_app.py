@@ -17,7 +17,7 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 st.title("GPT-2 Text Generator")
 
 # User input for the prompt
-prompt = st.text_input("Enter your prompt:", value="The future of AI is")
+prompt = st.text_input("Enter your prompt:", value="I love studying Deploying Generative AI in the Enterprise")
 
 
 num_tokens = st.number_input("Enter number of tokens to generate:", min_value=10, max_value=100, value=50)
@@ -81,5 +81,5 @@ def draw_random_animal():
     return random.choice(animals)
 
 # Display a randomly chosen animal image at the bottom
-st.markdown("### Random Animal Image:")
+st.markdown("### You have the SWAG!")
 st.text(draw_random_animal())
