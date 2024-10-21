@@ -20,7 +20,7 @@ st.title("GPT-2 Text Generator")
 prompt = st.text_input("Enter your prompt:", value="Enter the prompt")
 
 # User input for the number of tokens
-num_tokens = st.number_input("Enter number of tokens to generate:", min_value=10, max_value=100, value=50)
+num_tokens = st.number_input("Enter number of tokens to generate:", min_value=50, max_value=200, value=100)
 
 # Generate text with different levels of creativity
 if st.button("Generate Response"):
