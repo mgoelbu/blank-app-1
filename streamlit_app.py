@@ -14,7 +14,7 @@ torch.manual_seed(BUID)
 model = GPT2LMHeadModel.from_pretrained("gpt2")
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
-st.title("GPT-2 Text Generator")
+st.title("GPT-2 Text Generator by Mayank")
 
 # User input for the prompt
 prompt = st.text_input("Enter your prompt:", value="Enter the prompt")
