@@ -55,31 +55,3 @@ if st.button("Generate Response"):
     # Display Low Creativity Response with markdown formatting
     st.markdown("### **Low Creativity Response:**")
     st.markdown(f"> {generated_text_low}")  # Quoting the text for markdown
-
-# Divider before the random animal drawing
-st.markdown("---")
-
-# Function to randomly draw an animal using asterisks (*)
-def draw_random_animal():
-    animals = [
-        '''
-         /\_/\\
-        ( o.o )
-         > ^ <
-        ''',  # Cat
-        '''
-         __
-        (oO)
-         || 
-        ''',  # Cow
-        '''
-         ,_,
-        (o_o)    
-        (/")(")
-        ''',  # Bunny
-    ]
-    return random.choice(animals)
-
-# Display a randomly chosen animal image at the bottom
-st.markdown("### You have the SWAG!")
-st.text(draw_random_animal())
