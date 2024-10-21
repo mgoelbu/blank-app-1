@@ -17,7 +17,7 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 st.title("GPT-2 Text Generator by Mayank")
 
 # User input for the prompt
-prompt = st.text_input("Enter your prompt:", value="Enter the prompt")
+prompt = st.text_input("Enter your prompt:", value="I love my country because")
 
 # User input for the number of tokens
 num_tokens = st.number_input("Enter number of tokens to generate:", min_value=50, max_value=200, value=100)
