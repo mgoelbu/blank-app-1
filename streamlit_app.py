@@ -1,42 +1,46 @@
 import streamlit as st
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+import openai
+import random
+import numpy as np
+import os
 
-# Load GPT-2 model and tokenizer
-model = GPT2LMHeadModel.from_pretrained("gpt2")
-tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+my_secret_key = st.secrets['MyOpenAIKey']
+os.environ["OPENAI_API_KEY"] = my_secret_key
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-st.title("GPT-2 Text Generator")
 
-# Text input from user
-prompt = st.text_input("Enter your prompt:", value="The future of AI is")
+BUID = 45664861 # Replace with your actual BU ID (numeric part only)
 
-# Number of tokens input from user
+# Seed the random generators for consistency
+random.seed(BUID)
+np.random.seed(BUID)
+
+st.title("GPT-2 Text Generator using OpenAI")
+
+# User prompt input
+prompt = st.text_input("Enter your prompt:", value="Barcelona is a")
+
+# Number of tokens input
 num_tokens = st.number_input("Enter number of tokens to generate:", min_value=10, max_value=100, value=50)
 
-# Generate text with different levels of creativity
+# Generate the text when the button is pressed
 if st.button("Generate Response"):
-    inputs = tokenizer(prompt, return_tensors="pt")
-    
-    # High creativity (low predictability)
-    outputs_high = model.generate(
-        inputs['input_ids'], 
-        max_length=num_tokens, 
-        do_sample=True, 
-        temperature=1.5,  # High creativity
-        top_p=0.95
+    # High creativity (temperature = 1.5)
+    response_high = openai.Completion.create(
+        engine="text-davinci-002",  # You can switch to another engine if needed
+        prompt=prompt,
+        max_tokens=int(num_tokens),
+        temperature=1.5  # High creativity
     )
-    generated_text_high = tokenizer.decode(outputs_high[0], skip_special_tokens=True)
     st.write("High Creativity Response:")
-    st.write(generated_text_high)
-    
-    # Low creativity (high predictability)
-    outputs_low = model.generate(
-        inputs['input_ids'], 
-        max_length=num_tokens, 
-        do_sample=True, 
-        temperature=0.7,  # Low creativity
-        top_p=0.95
+    st.write(response_high.choices[0].text.strip())
+
+    # Low creativity (temperature = 0.7)
+    response_low = openai.Completion.create(
+        engine="text-davinci-002",  # Use the same engine
+        prompt=prompt,
+        max_tokens=int(num_tokens),
+        temperature=0.7  # Low creativity
     )
-    generated_text_low = tokenizer.decode(outputs_low[0], skip_special_tokens=True)
     st.write("Low Creativity Response:")
-    st.write(generated_text_low)
+    st.write(response_low.choices[0].text.strip())
