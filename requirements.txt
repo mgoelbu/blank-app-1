@@ -1,3 +1,4 @@
 openai
 torch
 streamlit
+transformers==4.44.2
